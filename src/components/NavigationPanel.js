@@ -1,5 +1,5 @@
 import React from 'react';
-import meIcon from '../Icons/me.png'; 
+import meIcon from '../Icons/me.jpeg'; 
 import newIcon from '../Icons/new.png'; 
 import fbIcon from '../Icons/fb.png'; 
 import gitIcon from '../Icons/github.png'; 
