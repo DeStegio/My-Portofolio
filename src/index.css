@@ -30,7 +30,7 @@ body, html{
 .rightside{
     display: flex;
     flex:2;
-    background-image: url('./Icons/background.png');
+    background-image: url('/Icons/background.png');
     background-size: cover; /* Ensures full coverage */
     background-repeat: no-repeat;
 }
@@ -138,19 +138,19 @@ p{
     font-size: 20px;
 } 
 
-.typing::after {
-    content: '|';
-    animation: blink-caret 0.75s step-end infinite;
-}
 
-@keyframes blink-caret {
-    from, to {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0;
-    }
-}
+.typing-effect {
+  display: inline-block; 
+  border-right: 2px solid black; 
+  animation: blink-cursor 0.2s step-end infinite; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  align-self: center; 
+  margin-left: 150px;
+  margin-top: 180px;
+  font-size: 20px;
+  
+  }
  li:hover >a  {
     filter: invert(34%) sepia(82%) saturate(2058%) hue-rotate(176deg) brightness(95%) contrast(86%);
     
@@ -179,6 +179,8 @@ background-color: grey;
         flex: 1; /* Allow it to adjust */
         width: 100%; /* Make it full width */
         margin-left: 0; /* Remove margin if any */
+        height: 100vh; /* Ensure container height fills the viewport */
+
     }
 
     .photo #me {
@@ -194,7 +196,9 @@ background-color: grey;
         position: static;
     }
     
-
+    .typing-effect{
+        margin:0px;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -215,6 +219,10 @@ background-color: grey;
     }
     #intro{
         position :static;
+    }
+
+    .typing-effect{
+        margin:0px;
     }
     
 }
