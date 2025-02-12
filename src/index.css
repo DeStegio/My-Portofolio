@@ -30,7 +30,7 @@ body, html{
 .rightside{
     display: flex;
     flex:2;
-    background-image: url('/Icons/background.png');
+    background-image: url('./assets/Icons/background.png');
     background-size: cover; /* Ensures full coverage */
     background-repeat: no-repeat;
 }
