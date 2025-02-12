@@ -1,23 +1,35 @@
 import React from 'react';
+import ProjectCard from './ProjectCard';
 
-const Resume = () => (
-    <div className="resume">
-        <h1>George Stefanopoulos</h1>
-        <p>Junior Web Developer passionate about creating impactful digital solutions.</p>
-        <div className="resume-section">
-            <h2>Contact Information</h2>
-            <p>Email: stefanopoulos_giorgos@outlook.com</p>
-            <p>Phone: +30 6983829822</p>
+const Resume = () => {
+    const projects = [
+        {
+            title: "Online Courses Platform",
+            description: "A web-based platform for managing online courses.",
+            technologies: "React, Node.js, Firebase",
+            link: "#"
+        },
+        {
+            title: "Portfolio Website",
+            description: "My personal portfolio showcasing my projects and skills.",
+            technologies: "React, CSS",
+            link: "#"
+        }
+    ];
+
+    return (
+        <div className="resume">
+            <h1>George Stefanopoulos</h1>
+            <p>Junior Web Developer passionate about creating impactful digital solutions.</p>
+
+            <h2>Projects</h2>
+            <div className="projects-container">
+                {projects.map((project, index) => (
+                    <ProjectCard key={index} {...project} />
+                ))}
+            </div>
         </div>
-        <div className="resume-section">
-            <h2>Skills</h2>
-            <ul>
-                <li>HTML, CSS, JavaScript</li>
-                <li>React, Node.js</li>
-                <li>Git, Responsive Design</li>
-            </ul>
-        </div>
-    </div>
-);
+    )
+};
 
 export default Resume;
