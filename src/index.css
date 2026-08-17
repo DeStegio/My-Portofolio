@@ -466,6 +466,28 @@ button {
     color: var(--accent);
 }
 
+/* Live clock under the email — small sign of life on the page */
+.clock {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 18px 0 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.clock-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    animation: pulse 2.4s ease-in-out infinite;
+}
+
 /* Typing line */
 .typing {
     min-height: 2.2em;
@@ -1065,6 +1087,11 @@ button {
     65% { transform: rotate(1.6deg); }
 }
 
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.5; }
+}
+
 @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
@@ -1116,17 +1143,350 @@ button {
     }
 }
 
-@media screen and (max-width: 480px) {
+/* ===== Phones =====
+   The sidebar turns into a slim sticky header and the menu moves to a fixed
+   bar at the bottom, where a thumb can actually reach it. */
+@media screen and (max-width: 700px) {
+    .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        overflow: visible;
+        flex-direction: row;
+        align-items: center;
+        padding: 12px 20px;
+        /* Solid on purpose: a backdrop-filter here would make the fixed bottom
+           bar position itself against the header instead of the screen */
+        background-color: var(--dark);
+    }
+
+    .sidebar-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        /* leave room for the accent dots pinned on the right */
+        padding-right: 78px;
+    }
+
+    .sidebar-photo {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+        padding: 2px;
+    }
+
+    .sidebar-name {
+        font-size: 16px;
+        line-height: 1.05;
+        margin: 0 0 4px;
+    }
+
+    .sidebar-role {
+        font-size: 9px;
+        letter-spacing: 0.18em;
+    }
+
+    /* Only the accent picker stays up here — the profile links are repeated
+       in the contact section anyway */
+    .sidebar-bottom {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        margin: 0;
+        padding: 0;
+    }
+
+    .sidebar-bottom .label,
+    .profiles {
+        display: none;
+    }
+
+    .accents {
+        margin: 0;
+        gap: 7px;
+    }
+
+    .accent-dot {
+        width: 13px;
+        height: 13px;
+    }
+
+    /* Bottom bar */
+    .nav {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 30;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        background-color: rgba(14, 13, 11, 0.95);
+        backdrop-filter: blur(14px);
+        border-top: 1px solid rgba(238, 234, 224, 0.18);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .nav-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        padding: 11px 4px 14px;
+        border-bottom: none;
+    }
+
+    .nav-item:hover {
+        background: none;
+        transform: none;
+    }
+
+    .nav-number {
+        font-size: 9px;
+    }
+
+    .nav-label {
+        font-size: 15px;
+    }
+
+    .nav-line {
+        position: absolute;
+        left: 22%;
+        right: 22%;
+        bottom: 6px;
+        flex: none;
+    }
+
+    /* The header is part of the page flow here, so a 100vh section would push
+       the page just past the screen. Letting the section grow into whatever is
+       left instead keeps short sections exactly one screen tall. */
+    .content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* The bottom bar floats over the page, so every section keeps room for it */
     .section,
     .home {
-        padding: 60px 24px 80px;
+        flex: 1;
+        min-height: 0;
+        padding: 34px 20px 116px;
     }
 
-    .sidebar {
-        padding: 28px 24px;
+    .btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 17px 22px;
     }
 
+    /* Home */
+    .home {
+        /* Spreads the three blocks over the screen instead of leaving a hole
+           under the last one */
+        justify-content: space-between;
+        padding-top: 40px;
+    }
+
+    .home-glow {
+        width: 420px;
+        height: 420px;
+    }
+
+    .home-title {
+        font-size: clamp(40px, 12.5vw, 60px);
+        margin-top: 16px;
+    }
+
+    .typing {
+        min-height: 3.4em;
+        font-size: 19px;
+    }
+
+    .home-actions {
+        margin-top: 30px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Negative margins let the marquee run edge to edge */
     .marquee {
-        margin-top: 48px;
+        margin: 32px -20px 0;
+    }
+
+    .marquee-item {
+        gap: 16px;
+        padding-right: 16px;
+        font-size: 22px;
+    }
+
+    .home-contact a {
+        font-size: 17px;
+        word-break: break-all;
+    }
+
+    .clock {
+        margin-top: 14px;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+    }
+
+    /* Resume */
+    .resume-head {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 22px;
+    }
+
+    .divider {
+        margin: 20px 0 24px;
+    }
+
+    .resume-intro {
+        font-size: 23px;
+        margin-bottom: 34px;
+    }
+
+    .resume-grid {
+        gap: 12px 0;
+    }
+
+    .resume-grid .label {
+        padding-top: 24px;
+    }
+
+    .timeline-button {
+        grid-template-columns: 24px minmax(0, 1fr) 20px;
+        align-items: start;
+        gap: 12px;
+        padding: 18px 2px;
+    }
+
+    .timeline-dot {
+        margin-top: 8px;
+    }
+
+    .timeline-role {
+        flex-direction: column;
+        gap: 5px;
+        font-size: 22px;
+    }
+
+    .timeline-sign {
+        text-align: right;
+    }
+
+    .timeline-detail {
+        padding: 0 2px 20px 36px;
+    }
+
+    .timeline-detail p {
+        font-size: 17px;
+    }
+
+    /* Projects */
+    .projects-count {
+        width: 100%;
+        margin-top: 4px;
+    }
+
+    /* Too many filters to wrap on a phone, so they scroll sideways instead */
+    .filters {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        margin: 18px -20px 0;
+        padding: 2px 20px 6px;
+        scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filter {
+        flex: 0 0 auto;
+        padding: 13px 16px;
+    }
+
+    .project-card a {
+        display: flex;
+        flex-direction: column;
+        padding: 24px 0;
+    }
+
+    .project-card a:hover {
+        padding-left: 0;
+    }
+
+    .project-thumb {
+        order: -1;
+        height: 150px;
+        max-width: none;
+    }
+
+    .project-num {
+        padding-top: 0;
+    }
+
+    .project-title {
+        font-size: 28px;
+    }
+
+    .project-description {
+        font-size: 17px;
+    }
+
+    .project-view {
+        padding-top: 0;
+    }
+
+    .projects-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+    }
+
+    /* Contact */
+    .contact {
+        justify-content: flex-start;
+    }
+
+    .contact-title {
+        font-size: clamp(34px, 10vw, 48px);
+    }
+
+    .contact-grid {
+        margin-top: 32px;
+        gap: 38px;
+    }
+
+    .form-field input,
+    .form-field textarea {
+        font-size: 19px;
+        padding: 12px 2px;
+    }
+
+    .contact-sent {
+        padding: 24px;
+    }
+
+    .contact-email {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .contact-email a {
+        word-break: break-all;
+    }
+
+    .copy-button {
+        padding: 12px 16px;
+    }
+
+    .contact-links a {
+        padding: 17px 2px;
     }
 }

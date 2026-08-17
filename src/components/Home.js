@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import TypingEffect from './TypingEffect';
+import Clock from './Clock';
 import { EMAIL } from '../data/profiles';
 import { STACK } from '../data/stack';
 
@@ -65,6 +66,7 @@ const Home = ({ onSelect }) => {
             <div className="home-contact">
                 <h2 className="label">Reach me</h2>
                 <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+                <Clock />
             </div>
         </section>
     );
