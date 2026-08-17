@@ -7,8 +7,8 @@ const PROJECTS = [
     {
         number: '01',
         title: 'Verimpact',
-        description: 'A modular platform for structured data and workflow management, built with the team at ITML: application logic and validations in Laravel, and screens that update without a reload.',
-        technologies: ['PHP', 'Laravel', 'MySQL', 'jQuery'],
+        description: 'A modular platform for structured data and workflow management, built with the team at ITML. I work on the frontend — the forms and screens people spend their day in — and on connecting them to the Laravel API behind them.',
+        technologies: ['JavaScript', 'jQuery', 'Bootstrap', 'Laravel'],
         link: null
     },
     {

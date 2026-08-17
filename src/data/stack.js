@@ -1,13 +1,14 @@
 // Technologies I work with, shown on the home marquee and on the resume
+// Frontend first, since that is the work I do
 export const STACK = [
-    'PHP',
-    'Laravel',
     'JavaScript',
     'React',
-    'MySQL',
-    'jQuery',
     'HTML & CSS',
+    'jQuery',
     'Bootstrap',
+    'PHP',
+    'Laravel',
+    'MySQL',
     'Node.js',
     'Git'
 ];

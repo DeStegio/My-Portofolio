@@ -8,8 +8,8 @@ const TIMELINE = [
     {
         role: 'Web Developer',
         when: 'ITML · Mar 2025 → now',
-        detail: 'Building the Verimpact platform: the business logic and APIs in PHP and Laravel, the screens people actually use in JavaScript and jQuery, and the MySQL behind both.',
-        tags: ['PHP', 'Laravel', 'MySQL', 'jQuery']
+        detail: 'The frontend of the Verimpact platform: the screens people work in, built with JavaScript, jQuery and Bootstrap, and wired to the Laravel API so the data moves both ways without a reload.',
+        tags: ['JavaScript', 'jQuery', 'Bootstrap', 'Laravel']
     },
     {
         role: 'Web Developer',
