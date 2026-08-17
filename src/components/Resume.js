@@ -1,26 +1,45 @@
 import React, { useState } from 'react';
 import { STACK } from '../data/stack';
 
-// TODO: replace the bracketed placeholders with the real entries
+// Drop the PDF in public/ under this name and the download button starts working
+const CV_URL = `${process.env.PUBLIC_URL}/george-stefanopoulos-cv.pdf`;
+
 const TIMELINE = [
     {
-        role: '[ Your role ]',
-        when: '[ 2024 → now ]',
-        detail: 'One or two lines on what you built and what it changed. Replace with your real experience.',
-        tags: ['React']
+        role: 'Web Developer',
+        when: 'ITML · Mar 2025 → now',
+        detail: 'Building the Verimpact platform: the business logic and APIs in PHP and Laravel, the screens people actually use in JavaScript and jQuery, and the MySQL behind both.',
+        tags: ['PHP', 'Laravel', 'MySQL', 'jQuery']
     },
     {
-        role: '[ Earlier role ]',
-        when: '[ years ]',
-        detail: 'Keep every entry to a single sentence — recruiters skim.',
-        tags: ['JavaScript']
+        role: 'Web Developer',
+        when: 'Hellenic Army · 2023 → 2024',
+        detail: 'A platform for running training sessions online — secure logins, user roles, shared files and a raise-hand button — on a server I set up and kept running myself.',
+        tags: ['PHP', 'JavaScript', 'AJAX']
     },
     {
-        role: 'Started coding',
-        when: '[ year ]',
-        detail: 'Where it began: the first thing you built and why you kept going.',
-        tags: ['HTML & CSS']
+        role: 'E-commerce Product Specialist',
+        when: 'En Drasei Vouno kai Thalassa · 2021 → 2023',
+        detail: 'Kept the online shop honest: new products, accurate stock, suppliers chased on time, and categories that made sense to whoever was browsing.',
+        tags: ['E-commerce']
+    },
+    {
+        role: 'Waiter & barman',
+        when: 'Pantheon 1900, Sabbia Beach Bar · 2014 → 2021',
+        detail: 'Seven years of reading people quickly and staying calm when ten things happen at once. It turns out both transfer to a standup.',
+        tags: ['Under pressure']
     }
+];
+
+const TRAINING = [
+    { name: 'Laravel & PHP Mastery', meta: 'Udemy · 2025' },
+    { name: 'The Complete Web Development Bootcamp', meta: 'Udemy · 2024 · 60 hours' },
+    { name: 'The Git & GitHub Bootcamp', meta: 'Udemy · 17 hours' }
+];
+
+const LANGUAGES = [
+    { name: 'Greek', meta: 'Mother tongue' },
+    { name: 'English', meta: 'B2 · reading, writing, speaking' }
 ];
 
 const Resume = () => {
@@ -37,14 +56,14 @@ const Resume = () => {
                     <span className="label">02</span>
                     <h1 className="section-title">Resume</h1>
                 </div>
-                {/* TODO: link the real CV file */}
-                <a className="btn btn-dark-outline" href="#cv">Download CV (PDF)</a>
+                <a className="btn btn-dark-outline" href={CV_URL} download>Download CV (PDF)</a>
             </div>
 
             <div className="divider" aria-hidden="true" />
 
             <p className="resume-intro">
-                Self&#8209;taught, curious, and happiest when something finally <em>works</em>.
+                Informatics engineer by degree, web developer by choice, and happiest when
+                something finally <em>works</em>.
             </p>
 
             <div className="resume-grid">
@@ -54,7 +73,7 @@ const Resume = () => {
                         const open = index === openRow;
 
                         return (
-                            <div className={open ? 'timeline-row open' : 'timeline-row'} key={row.role}>
+                            <div className={open ? 'timeline-row open' : 'timeline-row'} key={row.when}>
                                 <button
                                     type="button"
                                     className="timeline-button"
@@ -93,9 +112,37 @@ const Resume = () => {
 
                 <h2 className="label">Education</h2>
                 <div>
-                    <p className="education-degree">[ Degree ]</p>
-                    <p className="education-school">[ Institution &#183; years ]</p>
+                    <p className="education-degree">
+                        Integrated Master&#8217;s (MEng) in Informatics &amp; Computer Engineering
+                    </p>
+                    <p className="education-school">
+                        University of West Attica &#183; 2014&#8211;2023 &#183; GPA 7.07/10
+                    </p>
+                    <p className="education-note">
+                        Thesis: a web platform for remote psychotherapy sessions, designed with a
+                        senior lecturer from the University of Lincoln.
+                    </p>
                 </div>
+
+                <h2 className="label">Training</h2>
+                <ul className="entries">
+                    {TRAINING.map((course) => (
+                        <li key={course.name}>
+                            <span className="entry-name">{course.name}</span>
+                            <span className="entry-meta">{course.meta}</span>
+                        </li>
+                    ))}
+                </ul>
+
+                <h2 className="label">Languages</h2>
+                <ul className="entries">
+                    {LANGUAGES.map((language) => (
+                        <li key={language.name}>
+                            <span className="entry-name">{language.name}</span>
+                            <span className="entry-meta">{language.meta}</span>
+                        </li>
+                    ))}
+                </ul>
             </div>
         </section>
     );

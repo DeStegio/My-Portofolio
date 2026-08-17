@@ -1,8 +1,8 @@
 import React from 'react';
 
-const ProjectCard = ({ number, title, description, technologies, link }) => (
-    <li className="project-card">
-        <a href={link} target="_blank" rel="noopener noreferrer">
+const ProjectCard = ({ number, title, description, technologies, link }) => {
+    const content = (
+        <>
             <span className="project-num" aria-hidden="true">{number}</span>
 
             {/* Placeholder until the real screenshots are ready */}
@@ -18,9 +18,22 @@ const ProjectCard = ({ number, title, description, technologies, link }) => (
                 </span>
             </span>
 
-            <span className="project-view">View &#8594;</span>
-        </a>
-    </li>
-);
+            <span className="project-view">{link ? 'View →' : 'Not public'}</span>
+        </>
+    );
+
+    // Work projects have nowhere to send people, so they stay a plain card
+    return (
+        <li className="project-card">
+            {link ? (
+                <a className="project-body" href={link} target="_blank" rel="noopener noreferrer">
+                    {content}
+                </a>
+            ) : (
+                <div className="project-body">{content}</div>
+            )}
+        </li>
+    );
+};
 
 export default ProjectCard;
