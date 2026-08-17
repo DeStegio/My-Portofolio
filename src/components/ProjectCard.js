@@ -1,13 +1,26 @@
-import React from "react";
+import React from 'react';
 
-const ProjectCard= ({title, description, technologies, link})=>{
-return(
-    <div className="project-card">
-    <h3>{title}</h3>
-    <p>{description}</p>
-    <p><strong>Technologies:</strong> {technologies}</p>
-    <a href={link} target="_blank" rel="noopener noreferrer">View Project</a>
-</div>
-)}
+const ProjectCard = ({ number, title, description, technologies, link }) => (
+    <li className="project-card">
+        <a href={link} target="_blank" rel="noopener noreferrer">
+            <span className="project-num" aria-hidden="true">{number}</span>
+
+            {/* Placeholder until the real screenshots are ready */}
+            <span className="project-thumb" aria-hidden="true">drop screenshot</span>
+
+            <span className="project-info">
+                <span className="project-title">{title}</span>
+                <span className="project-description">{description}</span>
+                <span className="tags">
+                    {technologies.map((tech) => (
+                        <span className="tag" key={tech}>{tech}</span>
+                    ))}
+                </span>
+            </span>
+
+            <span className="project-view">View &#8594;</span>
+        </a>
+    </li>
+);
 
 export default ProjectCard;

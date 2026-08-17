@@ -1,44 +1,43 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
+
+const TEXT = "I'm a junior web developer, building for the web.";
+const TYPING_SPEED = 70;
+const DELETING_SPEED = 30;
+const PAUSE = 2500; // how long the full sentence stays on screen
 
 const TypingEffect = () => {
-    const textElement = useRef(null); // Ref to the DOM element
-    const text = "Hello I am George and I'm a junior web developer!";
-    const typingSpeed = 100; // Time delay for typing each character
-    const pauseBetweenLoops = 2000; // Delay before restarting the effect
-  
-    useEffect(() => {
-      const typeText = (text, element, speed) => {
-        let i = 0;
-  
-        const typeWriter = () => {
-          if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed); // Continue typing
-          } else {
-            setTimeout(() => {
-              element.innerHTML = ""; // Clear the text
-              i = 0; // Reset the counter
-              typeWriter(); // Restart typing
-            }, pauseBetweenLoops);
-          }
-        };
-  
-        typeWriter();
-      };
-  
-      if (textElement.current) {
-        typeText(text, textElement.current, typingSpeed);
-      }
-    }, []); // The empty dependency array ensures this runs only once on mount
-  
-  return (
-    <div
-      ref={textElement}
-      className="typing-effect"
+    const [length, setLength] = useState(0);
+    const [deleting, setDeleting] = useState(false);
 
-    ></div>
-  );
+    useEffect(() => {
+        let delay = deleting ? DELETING_SPEED : TYPING_SPEED;
+        if (!deleting && length === TEXT.length) {
+            delay = PAUSE;
+        }
+
+        const timer = setTimeout(() => {
+            if (deleting) {
+                if (length === 0) {
+                    setDeleting(false);
+                } else {
+                    setLength(length - 1);
+                }
+            } else if (length === TEXT.length) {
+                setDeleting(true);
+            } else {
+                setLength(length + 1);
+            }
+        }, delay);
+
+        return () => clearTimeout(timer);
+    }, [length, deleting]);
+
+    return (
+        <p className="typing">
+            {TEXT.slice(0, length)}
+            <span className="typing-cursor" />
+        </p>
+    );
 };
 
 export default TypingEffect;

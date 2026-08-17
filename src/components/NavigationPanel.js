@@ -1,60 +1,70 @@
 import React from 'react';
 import meImage from '../assets/Icons/me.jpeg';
-import instagramIcon from '../assets/Icons/new.png';
-import facebookIcon from '../assets/Icons/fb.png';
-import githubIcon from '../assets/Icons/github.png';
-import linkedinIcon from '../assets/Icons/linkedin.png';
-import homeIcon from '../assets/Icons/home.png';
-import resumeIcon from '../assets/Icons/resume.png';
-import projectIcon from '../assets/Icons/project.png';
-import contactIcon from '../assets/Icons/contact.png';
+import { PROFILES } from '../data/profiles';
+import { ACCENTS } from '../data/accents';
 
-const NavigationPanel = ({ onSelect }) => (
-    <div className="leftside">
-        {/* Photo Section */}
-        <div className="photo">
-            <img id="me" src={meImage} alt="A picture of me" />
-            <p className="myname">George-Paraskevas Stefanopoulos</p>
+const SECTIONS = [
+    { id: 'home', label: 'Home', number: '01' },
+    { id: 'resume', label: 'Resume', number: '02' },
+    { id: 'projects', label: 'Projects', number: '03' },
+    { id: 'contact', label: 'Contact', number: '04' }
+];
+
+const NavigationPanel = ({ selected, onSelect, accent, onAccentChange }) => (
+    <aside className="sidebar">
+        <div>
+            <div className="sidebar-photo">
+                <img src={meImage} alt="Portrait of George-Paraskevas Stefanopoulos" />
+            </div>
+            <p className="sidebar-name">George&#8209;Paraskevas Stefanopoulos</p>
+            <p className="sidebar-role">Junior Web Developer</p>
         </div>
 
-        {/* Social Icons */}
-        <div className="social">
-            <a href="https://www.instagram.com/giorgos.stefano/">
-                <img className="icon" src={instagramIcon} alt="Instagram" />
-            </a>
-            <a href="https://www.facebook.com/gio.paranoid">
-                <img className="icon" src={facebookIcon} alt="Facebook" />
-            </a>
-            <a href="https://github.com/DeStegio">
-                <img className="icon" src={githubIcon} alt="Github" />
-            </a>
-            <a href="https://www.linkedin.com/in/george-stefanopoulos-9a28a2182/">
-                <img className="icon" src={linkedinIcon} alt="LinkedIn" />
-            </a>
-        </div>
+        <nav className="nav" aria-label="Site sections">
+            {SECTIONS.map((section) => (
+                <button
+                    key={section.id}
+                    type="button"
+                    className={section.id === selected ? 'nav-item active' : 'nav-item'}
+                    onClick={() => onSelect(section.id)}
+                >
+                    <span className="nav-number">{section.number}</span>
+                    <span className="nav-label">
+                        {section.label}
+                        {section.id === selected && <span className="nav-line" />}
+                    </span>
+                </button>
+            ))}
+        </nav>
 
-        {/* Navigation Menu */}
-        <div className="navigation">
-            <ul className="navlist">
-                <li onClick={() => onSelect('home')}>
-                    <img className="navicon" src={homeIcon} alt="Home" />
-                    <a className="navclick">Home</a>
-                </li>
-                <li onClick={() => onSelect('resume')}>
-                    <img className="navicon" src={resumeIcon} alt="Resume" />
-                    <a className="navclick">Resume</a>
-                </li>
-                <li onClick={() => onSelect('projects')}>
-                    <img className="navicon" src={projectIcon} alt="Projects" />
-                    <a className="navclick">Projects</a>
-                </li>
-                <li onClick={() => onSelect('contact')}>
-                    <img className="navicon" src={contactIcon} alt="Contact" />
-                    <a className="navclick">Contact</a>
-                </li>
+        <div className="sidebar-bottom">
+            <p className="label">Profiles</p>
+            <ul className="profiles">
+                {PROFILES.map((profile) => (
+                    <li key={profile.name}>
+                        <a href={profile.url} target="_blank" rel="noopener noreferrer">
+                            {profile.name}
+                        </a>
+                    </li>
+                ))}
             </ul>
+            <p className="label">Available for work</p>
+
+            <div className="accents">
+                {ACCENTS.map((option) => (
+                    <button
+                        key={option.name}
+                        type="button"
+                        className={option.color === accent ? 'accent-dot active' : 'accent-dot'}
+                        style={{ backgroundColor: option.color }}
+                        aria-label={`${option.name} accent colour`}
+                        aria-pressed={option.color === accent}
+                        onClick={() => onAccentChange(option.color)}
+                    />
+                ))}
+            </div>
         </div>
-    </div>
+    </aside>
 );
 
 export default NavigationPanel;
