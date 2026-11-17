@@ -1005,6 +1005,20 @@ button {
     align-self: flex-start;
 }
 
+.contact-form .btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+}
+
+.form-error {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #F2B8A0;
+    margin: 0;
+}
+
 .contact-sent {
     display: flex;
     flex-direction: column;

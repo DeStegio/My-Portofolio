@@ -13,7 +13,7 @@ hand-written CSS.
 | Home | Intro, a typing line, a scrolling list of the stack and a live clock |
 | Resume | Timeline of roles, stack, education, training and languages |
 | Projects | Filterable list of the work, tagged by technology |
-| Contact | A front-end only form, the email address and the profile links |
+| Contact | A form that emails me through Web3Forms, the email address and the profile links |
 
 A few things worth knowing about the build:
 
@@ -76,8 +76,3 @@ the [gh-pages](https://www.npmjs.com/package/gh-pages) package. GitHub Pages has
 be pointed at that branch — Settings → Pages → Source: **Deploy from a branch** →
 `gh-pages` → `/ (root)`. The `base` setting in `vite.config.js` is what makes the
 asset paths work from the `/My-Portofolio/` subfolder.
-
-## Still to do
-
-- [ ] Replace the striped placeholders with real project screenshots
-- [ ] Wire the contact form to something that actually sends mail

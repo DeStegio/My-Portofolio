@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { EMAIL, PROFILES } from '../data/profiles';
+import { EMAIL, PROFILES, WEB3FORMS_ACCESS_KEY } from '../data/profiles';
 
 const EMPTY_FORM = { name: '', email: '', message: '' };
 
 const Contact = () => {
     const [form, setForm] = useState(EMPTY_FORM);
     const [sentName, setSentName] = useState(null);
+    const [sending, setSending] = useState(false);
+    const [error, setError] = useState(false);
     const [copied, setCopied] = useState(false);
 
     const handleChange = (event) => {
@@ -13,9 +15,37 @@ const Contact = () => {
         setForm({ ...form, [name]: value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        setSentName(form.name || 'friend');
+        setSending(true);
+        setError(false);
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify({
+                    access_key: WEB3FORMS_ACCESS_KEY,
+                    subject: `Portfolio message from ${form.name}`,
+                    from_name: 'Portfolio contact form',
+                    name: form.name,
+                    email: form.email,
+                    message: form.message,
+                    // Honeypot: bots fill every field, people never see this one
+                    botcheck: event.target.botcheck.checked
+                })
+            });
+            const result = await response.json();
+
+            if (!result.success) {
+                throw new Error(result.message);
+            }
+            setSentName(form.name);
+        } catch {
+            setError(true);
+        } finally {
+            setSending(false);
+        }
     };
 
     const resetForm = () => {
@@ -41,7 +71,7 @@ const Contact = () => {
                     <div className="contact-sent">
                         <h3>Thanks, {sentName}.</h3>
                         <p>
-                            This form is a front&#8209;end demo &#8212; hook it up to your inbox, or mail me directly.
+                            Your message is in my inbox. I&#8217;ll get back to you at {form.email}.
                         </p>
                         <button type="button" className="link-button" onClick={resetForm}>
                             Write another
@@ -88,9 +118,18 @@ const Contact = () => {
                             />
                         </div>
 
-                        <p className="form-note">Front&#8209;end demo &#8212; nothing is sent yet.</p>
+                        <input type="checkbox" name="botcheck" className="visually-hidden" tabIndex="-1" aria-hidden="true" />
 
-                        <button type="submit" className="btn btn-accent">Send it &#8594;</button>
+                        {error && (
+                            <p className="form-error" role="alert">
+                                Something went wrong and the message didn&#8217;t send. Please try again, or
+                                email me at {EMAIL}.
+                            </p>
+                        )}
+
+                        <button type="submit" className="btn btn-accent" disabled={sending}>
+                            {sending ? 'Sending…' : 'Send it →'}
+                        </button>
                     </form>
                 )}
 
