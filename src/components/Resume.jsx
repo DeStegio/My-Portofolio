@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { STACK } from '../data/stack';
 
 // Drop the PDF in public/ under this name and the download button starts working
-const CV_URL = `${process.env.PUBLIC_URL}/george-stefanopoulos-cv.pdf`;
+const CV_URL = `${import.meta.env.BASE_URL}george-stefanopoulos-cv.pdf`;
 
 const TIMELINE = [
     {

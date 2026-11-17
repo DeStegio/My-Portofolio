@@ -19,13 +19,13 @@ A few things worth knowing about the build:
 
 - **The accent colour is a CSS variable.** The picker in the sidebar sets `--accent`
   on the root container, and the whole page repaints from there — see
-  [`src/App.js`](src/App.js) and [`src/data/accents.js`](src/data/accents.js).
+  [`src/App.jsx`](src/App.jsx) and [`src/data/accents.js`](src/data/accents.js).
 - **Phones get a different shell.** Under 700px the sidebar splits into a sticky
   header and a fixed bottom bar, so the menu stays under a thumb. It is all in the
   media queries at the end of [`src/index.css`](src/index.css) — no separate
   components.
 - **Projects can be link-less.** Work built for someone else has no public
-  repository, so [`ProjectCard`](src/components/ProjectCard.js) renders a plain card
+  repository, so [`ProjectCard`](src/components/ProjectCard.jsx) renders a plain card
   instead of a link and marks it as not public. The filter list is derived from the
   projects themselves, so it can never offer a filter that matches nothing.
 - **The home glow follows the mouse** by writing a transform straight to the
@@ -34,10 +34,13 @@ A few things worth knowing about the build:
 
 ## Running it
 
+Requires Node.js 20.19+ (20.x) or 22.12+. Built with React 19 and Vite.
+
 ```bash
 npm install
-npm start      # http://localhost:3000/My-Portofolio
+npm start      # http://localhost:3000/My-Portofolio/
 npm run build  # production build into build/
+npm run preview # preview the production build locally
 ```
 
 Content lives in [`src/data/`](src/data/) — the links and email in `profiles.js`,
@@ -48,17 +51,18 @@ entries and the project list are constants at the top of their own components.
 
 ```
 src/
-  App.js               section switching and the accent state
+  index.jsx            React entry point
+  App.jsx               section switching and the accent state
   index.css            every style in the project
   components/
-    NavigationPanel.js sidebar on desktop, header + bottom bar on phones
-    Home.js            hero, marquee, mouse-following glow
-    TypingEffect.js    the line under the title
-    Clock.js           live clock, pinned to Athens time
-    Resume.js          timeline, stack, education, training, languages
-    Projects.js        project list and the technology filters
-    ProjectCard.js     one project, linked or not
-    Contact.js         form, email copy button, profile links
+    NavigationPanel.jsx sidebar on desktop, header + bottom bar on phones
+    Home.jsx            hero, marquee, mouse-following glow
+    TypingEffect.jsx    the line under the title
+    Clock.jsx           live clock, pinned to Athens time
+    Resume.jsx          timeline, stack, education, training, languages
+    Projects.jsx        project list and the technology filters
+    ProjectCard.jsx     one project, linked or not
+    Contact.jsx         form, email copy button, profile links
   data/                profiles, stack, accent colours
 ```
 
@@ -71,7 +75,7 @@ npm run deploy
 That builds the site and pushes the `build/` folder to the `gh-pages` branch with
 the [gh-pages](https://www.npmjs.com/package/gh-pages) package. GitHub Pages has to
 be pointed at that branch — Settings → Pages → Source: **Deploy from a branch** →
-`gh-pages` → `/ (root)`. The `homepage` field in `package.json` is what makes the
+`gh-pages` → `/ (root)`. The `base` setting in `vite.config.js` is what makes the
 asset paths work from the `/My-Portofolio/` subfolder.
 
 ## Still to do
