@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const TEXT = "I'm a junior web developer, building for the web.";
+const TEXT = "I'm a web developer, building for the web.";
 const TYPING_SPEED = 70;
 const DELETING_SPEED = 30;
 const PAUSE = 2500; // how long the full sentence stays on screen

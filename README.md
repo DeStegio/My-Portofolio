@@ -24,10 +24,9 @@ A few things worth knowing about the build:
   header and a fixed bottom bar, so the menu stays under a thumb. It is all in the
   media queries at the end of [`src/index.css`](src/index.css) — no separate
   components.
-- **Projects can be link-less.** Work built for someone else has no public
-  repository, so [`ProjectCard`](src/components/ProjectCard.jsx) renders a plain card
-  instead of a link and marks it as not public. The filter list is derived from the
-  projects themselves, so it can never offer a filter that matches nothing.
+- **Projects are a plain list for now.** Each [`ProjectCard`](src/components/ProjectCard.jsx)
+  shows a status (`Case study soon`, `You are here`) instead of a link, and the
+  section ends with a "Case studies — coming soon" box until the write-ups exist.
 - **The home glow follows the mouse** by writing a transform straight to the
   element. Going through state re-rendered the section on every mouse move, which
   made it stutter.
@@ -60,8 +59,8 @@ src/
     TypingEffect.jsx    the line under the title
     Clock.jsx           live clock, pinned to Athens time
     Resume.jsx          timeline, stack, education, training, languages
-    Projects.jsx        project list and the technology filters
-    ProjectCard.jsx     one project, linked or not
+    Projects.jsx        project list and the case studies box
+    ProjectCard.jsx     one project with its status
     Contact.jsx         form, email copy button, profile links
   data/                profiles, stack, accent colours
 ```

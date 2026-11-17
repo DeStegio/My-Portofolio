@@ -259,9 +259,7 @@ button {
 .resume-head,
 .resume-intro,
 .resume-grid,
-.filters,
-.project-list,
-.projects-footer,
+.projects-intro,
 .contact-kicker,
 .contact-title,
 .contact-grid {
@@ -747,108 +745,65 @@ button {
 }
 
 /* ===== Projects ===== */
-.projects-count {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    color: var(--text-dark-muted);
-    margin: 0;
+.projects-intro {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.3vw, 32px);
+    line-height: 1.32;
+    letter-spacing: -0.01em;
+    max-width: 34ch;
+    margin: 34px 0 0;
 }
 
-.filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 30px;
+.projects-intro em {
+    font-style: italic;
+    color: #6E5F31;
 }
 
-.filter {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 12px 18px;
-    background: none;
-    border: 1px solid #6E6759;
-    color: #3F3A31;
-    transition: transform 0.25s ease;
-}
-
-.filter:hover {
-    transform: translateY(-2px);
-}
-
-.filter.active {
-    background-color: var(--text-dark);
-    border-color: var(--text-dark);
-    color: var(--light);
+.projects-divider {
+    margin: 40px 0 0;
 }
 
 .project-list {
     list-style: none;
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 14px 32px;
+    padding: 34px 0;
     border-bottom: 1px solid rgba(26, 24, 21, 0.18);
-}
-
-/* A card is a link when the project has somewhere to go, and a plain box when
-   it does not — same layout either way */
-.project-card .project-body {
-    display: grid;
-    grid-template-columns: 56px 170px minmax(0, 1fr) auto;
-    align-items: start;
-    gap: 26px;
-    padding: 30px 20px 30px 0;
-    color: var(--text-dark);
-    transition: background-color 0.3s ease, padding-left 0.35s ease;
-}
-
-.project-card a.project-body:hover {
-    background-color: #EBE6DA;
-    color: var(--text-dark);
-    padding-left: 20px;
+    animation: rise 0.6s ease both;
 }
 
 .project-num {
+    flex: 0 0 40px;
     font-family: var(--mono);
     font-size: 12px;
-    letter-spacing: 0.1em;
-    color: var(--text-dark-muted);
-    padding-top: 10px;
-}
-
-/* Striped box until real screenshots are added */
-.project-thumb {
-    height: 108px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 8px;
-    border: 1px solid rgba(26, 24, 21, 0.24);
-    background-image: repeating-linear-gradient(135deg, rgba(26, 24, 21, 0.1) 0 6px, rgba(26, 24, 21, 0) 6px 12px);
-    font-family: var(--mono);
-    font-size: 10px;
     letter-spacing: 0.12em;
-    text-transform: uppercase;
     color: var(--text-dark-muted);
 }
 
 .project-info {
+    flex: 999 1 320px;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 11px;
-    min-width: 0;
+    gap: 10px;
 }
 
 .project-title {
     font-family: var(--serif);
-    font-size: clamp(26px, 2.9vw, 40px);
-    line-height: 1.05;
+    font-weight: 400;
+    font-size: clamp(30px, 3.2vw, 46px);
+    line-height: 1.04;
     letter-spacing: -0.02em;
+    color: var(--text-dark);
     margin: 0;
 }
 
@@ -857,35 +812,101 @@ button {
     font-weight: 300;
     line-height: 1.5;
     color: #34302A;
-    max-width: 52ch;
+    max-width: 50ch;
     margin: 0;
 }
 
-.project-view {
+.project-info .tags {
+    margin-top: 4px;
+}
+
+.project-status {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #3F3A31;
-    padding-top: 10px;
-    white-space: nowrap;
+    border: 1px solid #A39B8C;
+    padding: 8px 13px;
 }
 
-.projects-footer {
-    margin-top: 36px;
+.project-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #6E5F31;
+}
+
+.case-studies {
+    margin-top: 56px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 16px 28px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    color: #3F3A31;
+    justify-content: space-between;
+    gap: 24px 40px;
+    padding: 32px 36px;
+    background-color: #EBE6DA;
+    border-left: 3px solid #6E5F31;
+    animation: rise 0.7s 0.4s ease both;
 }
 
-.projects-footer a {
+.case-studies-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 52ch;
+}
+
+.case-studies-text .label {
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    margin: 0;
+}
+
+.case-studies-title {
+    font-family: var(--serif);
+    font-size: 27px;
+    line-height: 1.15;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.case-studies-body {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #34302A;
+    margin: 0;
+}
+
+.case-studies-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 22px;
+}
+
+.case-studies-link {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--text-dark);
     border-bottom: 1px solid #6E5F31;
+    padding: 6px 0;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
 }
 
 /* ===== Contact ===== */
@@ -1173,15 +1194,6 @@ button {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-
-    .project-card .project-body {
-        grid-template-columns: 1fr;
-        gap: 14px;
-    }
-
-    .project-thumb {
-        max-width: 260px;
-    }
 }
 
 /* ===== Phones =====
@@ -1428,47 +1440,18 @@ button {
     }
 
     /* Projects */
-    .projects-count {
-        width: 100%;
-        margin-top: 4px;
+    .projects-intro {
+        font-size: 23px;
+        margin-top: 24px;
     }
 
-    /* Too many filters to wrap on a phone, so they scroll sideways instead */
-    .filters {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        margin: 18px -20px 0;
-        padding: 2px 20px 6px;
-        scrollbar-width: none;
+    .projects-divider {
+        margin-top: 28px;
     }
 
-    .filters::-webkit-scrollbar {
-        display: none;
-    }
-
-    .filter {
-        flex: 0 0 auto;
-        padding: 13px 16px;
-    }
-
-    .project-card .project-body {
-        display: flex;
-        flex-direction: column;
-        padding: 24px 0;
-    }
-
-    .project-card a.project-body:hover {
-        padding-left: 0;
-    }
-
-    .project-thumb {
-        order: -1;
-        height: 150px;
-        max-width: none;
-    }
-
-    .project-num {
-        padding-top: 0;
+    .project-card {
+        gap: 12px;
+        padding: 26px 0;
     }
 
     .project-title {
@@ -1479,14 +1462,13 @@ button {
         font-size: 17px;
     }
 
-    .project-view {
-        padding-top: 0;
+    .case-studies {
+        margin-top: 36px;
+        padding: 24px 20px;
     }
 
-    .projects-footer {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 18px;
+    .case-studies-actions {
+        width: 100%;
     }
 
     /* Contact */

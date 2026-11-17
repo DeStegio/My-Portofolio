@@ -19,7 +19,7 @@ const NavigationPanel = ({ selected, onSelect, accent, onAccentChange }) => (
             {/* Kept in its own box so the header can sit it next to the photo on phones */}
             <div className="sidebar-identity">
                 <p className="sidebar-name">George&#8209;Paraskevas Stefanopoulos</p>
-                <p className="sidebar-role">Junior Web Developer</p>
+                <p className="sidebar-role">Web Developer</p>
             </div>
         </div>
 
