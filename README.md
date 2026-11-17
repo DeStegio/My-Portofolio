@@ -79,7 +79,5 @@ asset paths work from the `/My-Portofolio/` subfolder.
 
 ## Still to do
 
-- [ ] Add the CV as `public/george-stefanopoulos-cv.pdf`, which is where the
-      download button already points
 - [ ] Replace the striped placeholders with real project screenshots
 - [ ] Wire the contact form to something that actually sends mail
