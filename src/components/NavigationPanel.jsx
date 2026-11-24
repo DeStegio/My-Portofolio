@@ -29,6 +29,7 @@ const NavigationPanel = ({ selected, onSelect, accent, onAccentChange }) => (
                     key={section.id}
                     type="button"
                     className={section.id === selected ? 'nav-item active' : 'nav-item'}
+                    aria-current={section.id === selected ? 'page' : undefined}
                     onClick={() => onSelect(section.id)}
                 >
                     <span className="nav-number">{section.number}</span>

@@ -4,7 +4,7 @@ The personal site of George&#8209;Paraskevas Stefanopoulos, a web developer base
 Chalkida, Greece. Editorial layout, four sections, no UI library — plain React and
 hand-written CSS.
 
-**Live:** https://destegio.github.io/My-Portofolio/
+**Live:** https://gstefanopoulos.com/
 
 ## What is in it
 
@@ -12,7 +12,7 @@ hand-written CSS.
 | --- | --- |
 | Home | Intro, a typing line, a scrolling list of the stack and a live clock |
 | Resume | Timeline of roles, stack, education, training and languages |
-| Projects | Filterable list of the work, tagged by technology |
+| Projects | One unified list of applications, professional and academic work, with descriptions, technologies and available project links |
 | Contact | A form that emails me through Web3Forms, the email address and the profile links |
 
 A few things worth knowing about the build:
@@ -24,9 +24,11 @@ A few things worth knowing about the build:
   header and a fixed bottom bar, so the menu stays under a thumb. It is all in the
   media queries at the end of [`src/index.css`](src/index.css) — no separate
   components.
-- **Projects are a plain list for now.** Each [`ProjectCard`](src/components/ProjectCard.jsx)
-  shows a status (`Case study soon`, `You are here`) instead of a link, and the
-  section ends with a "Case studies — coming soon" box until the write-ups exist.
+- **Projects share one data source.** [`projects.js`](src/data/projects.js) holds
+  descriptions, technologies, features and optional live/source links. Set
+  Projects appear together in data order using the same
+  [`ProjectCard`](src/components/ProjectCard.jsx) presentation.
+  External actions open new tabs with `noopener noreferrer`; apps are never embedded.
 - **The home glow follows the mouse** by writing a transform straight to the
   element. Going through state re-rendered the section on every mouse move, which
   made it stutter.
@@ -37,14 +39,20 @@ Requires Node.js 20.19+ (20.x) or 22.12+. Built with React 19 and Vite.
 
 ```bash
 npm install
-npm start      # http://localhost:3000/My-Portofolio/
+npm start      # http://localhost:3000/
 npm run build  # production build into build/
 npm run preview # preview the production build locally
 ```
 
 Content lives in [`src/data/`](src/data/) — the links and email in `profiles.js`,
-the technologies in `stack.js`, the accent options in `accents.js`. The resume
-entries and the project list are constants at the top of their own components.
+the technologies in `stack.js`, projects in `projects.js`, and the accent options
+in `accents.js`. Resume entries live in the Resume component.
+
+Projects use a text-only presentation without image previews. Betit's database
+is no longer supported, so its card explicitly identifies database-dependent
+features as unavailable and describes the original implementation. Its source
+repository is private, so no public source link is shown. Oddly Alive links to
+its public GitHub repository.
 
 ## Structure
 
@@ -59,20 +67,27 @@ src/
     TypingEffect.jsx    the line under the title
     Clock.jsx           live clock, pinned to Athens time
     Resume.jsx          timeline, stack, education, training, languages
-    Projects.jsx        project list and the case studies box
-    ProjectCard.jsx     one project with its status
+    Projects.jsx        unified project list and contact action
+    ProjectCard.jsx     shared presentation for every project
     Contact.jsx         form, email copy button, profile links
-  data/                profiles, stack, accent colours
+  data/                projects, profiles, stack, accent colours
 ```
 
-## Deploying
+## Hosting
 
-```bash
-npm run deploy
-```
+Production is hosted on Vercel at the root of the custom domain. The existing
+Vite configuration keeps `base: '/'` and `build.outDir: 'build'`; Vercel should
+use `npm run build` with output directory `build`. No extra router rewrites or
+deployment configuration are needed for the existing section-based navigation.
 
-That builds the site and pushes the `build/` folder to the `gh-pages` branch with
-the [gh-pages](https://www.npmjs.com/package/gh-pages) package. GitHub Pages has to
-be pointed at that branch — Settings → Pages → Source: **Deploy from a branch** →
-`gh-pages` → `/ (root)`. The `base` setting in `vite.config.js` is what makes the
-asset paths work from the `/My-Portofolio/` subfolder.
+The legacy `deploy` / `predeploy` scripts are retained for compatibility with the
+old GitHub Pages workflow; they publish to GitHub Pages, not Vercel.
+
+## Validation
+
+`npm run build` is the configured production check. There are currently no lint
+or test scripts. Browser regression checks should cover all four sections at
+desktop, tablet and phone widths, keyboard focus after navigation, accent
+selection, the CV download, project status notices, and the project destinations.
+Mock the Web3Forms endpoint when checking contact success and error states so
+validation does not send real email.

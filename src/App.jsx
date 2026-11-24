@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import NavigationPanel from './components/NavigationPanel';
 import Home from './components/Home';
 import Resume from './components/Resume';
@@ -10,17 +10,20 @@ import './index.css';
 const App = () => {
     const [section, setSection] = useState('home');
     const [accent, setAccent] = useState(ACCENTS[0].color);
+    const contentRef = useRef(null);
 
     // On phones the menu sits at the bottom of the screen, so a section could
     // otherwise open half scrolled down
     const selectSection = (id) => {
         setSection(id);
+        contentRef.current?.focus({ preventScroll: true });
         window.scrollTo(0, 0);
     };
 
     // The accent is a CSS variable, so changing it here repaints the whole page
     return (
         <div className="container" style={{ '--accent': accent }}>
+            <a className="skip-link" href="#main-content">Skip to content</a>
             <NavigationPanel
                 selected={section}
                 onSelect={selectSection}
@@ -28,7 +31,7 @@ const App = () => {
                 onAccentChange={setAccent}
             />
 
-            <main className="content">
+            <main className="content" id="main-content" ref={contentRef} tabIndex={-1}>
                 {section === 'home' && <Home onSelect={selectSection} />}
                 {section === 'resume' && <Resume />}
                 {section === 'projects' && <Projects onSelect={selectSection} />}
